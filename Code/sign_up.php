@@ -8,18 +8,18 @@
 		if(!isset($_GET["page"])) {
 	?>
 	<form method="post" action="sign_up.php?page=2">
-	first_name:<input type="text" name="first_name" title="" required/><br /> 
-	last_name:<input type="text" name="last_name" required/><br /> 
-	email: <input type="text" name="email" required/><br /> 
-	place: <input type="text" name="place" required/><br /> 
-	postcode: <input type="text" name="postcode" required/><br />
-	street: <input type="text" name="street" required/><br />
-	house_number: <input type="text" name="house_number" required/><br />
-	date_of_birth: <input type="text" name="date_of_birth" required/><br />
-	password:<input type="password" name="password" required/><br />
-	password wiederholen:<input type="password" name="password2" required/><br />
-	<input type="submit" value="Senden" />
-</form>
+		first_name:<input type="text" name="first_name" placeholder="first name" required/><br /> 
+		last_name:<input type="text" name="last_name" placeholder="last name" required/><br /> 
+		email: <input type="text" name="email" placeholder="email" required/><br /> 
+		place: <input type="text" name="place" placeholder="place" required/><br /> 
+		postcode: <input type="text" name="postcode" placeholder="postcode" required/><br />
+		street: <input type="text" name="street" placeholder="street" required/><br />
+		house_number: <input type="text" name="house_number" placeholder="house number" required/><br />
+		date_of_birth: <input type="text" name="date_of_birth" placeholder="dd.mm.yyyy" required/><br />
+		password:<input type="password" name="password" placeholder="password" required/><br />
+		password repeat:<input type="password" name="password2" placeholder="password repeat" required/><br />
+		<input type="submit" value="Senden" />
+	</form>
 		<?php
 		}
 		?>
@@ -36,20 +36,14 @@
 			$date_of_birth = $_POST["date_of_birth"];
 			$password = md5($_POST["password"]);
 			$password2 = md5($_POST["password2"]);
-			
-			
 					
-			//Überprüfung ob E-Mail gültig ist
-			if(validateMail($email) == false) {
-				echo "Deine E-Mail ist nicht gueltig!";
-			} else {
-				echo "Deine E-Mail ist gueltig!";
-			}  
-			
 			//Überprüfung der einzelnen Eingaben des Benutzers
 			if($password != $password2) {
-				echo "Deine Passwoerter stimmen nicht ueberein. Bitte wiederholen deine Eingabe...<a href=\"sign_up.php\">back</a>";
+				echo "Deine Passwoerter stimmen nicht ueberein. Bitte wiederholen deine Eingabe...<a href=\"index.php\">back</a>";
 			} 
+			else if(validateMail($email) == false) {
+				echo "Deine E-Mail ist nicht gueltig!";
+			}			
 			else if(!preg_match('/^([a-zA-Z]{3,20})*$/', $_POST['first_name'])) {
 				echo "Bitte ueberpruefe die Eingabe von deinem Vornamen!";
 			} 
@@ -62,13 +56,13 @@
 			else if(!preg_match('/^(\d{5})$/', $_POST['postcode'])) {
 				echo "Bitte ueberpruefe die Eingabe von deiner PLZ!";
 			} 
-			else if(!preg_match('/^([a-zA-ZäöüÄÖÜß-]{3,20})*$/', utf8_encode($_POST['street']))) {
+			else if(!preg_match('/^([a-zA-ZäöüÄÖÜß]{3,20})*$/', utf8_encode($_POST['street']))) {
 				echo "Bitte ueberpruefe die Eingabe von deiner Strasse!";
 			} 
 			else if(!preg_match('/^(\d{1,3})$/', $_POST['house_number'])) {
 				echo "Bitte ueberpruefe die Eingabe von deiner Hausnummer!";
 			} 
-			else if(!preg_match('/^(\d{2}).(\d{2}).(\d{4})$/', $_POST['date_of_birth'])) {
+			else if(!preg_match('/^(\d{2})\.(\d{2})\.(\d{4})$/', $_POST['date_of_birth'])) {
 				echo "Bitte ueberpruefe die Eingabe von deinem Geburtsdatum!";
 			} 
 			else if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['password'])) {
@@ -112,8 +106,8 @@
 			if($checkdns && @dns_get_record($domain) === false) {
 			   return false;
 			}
+			//Die E-Mail Adresse arbeitet mit Umlauten
 		} elseif($consider_umlauts && preg_match('/^[a-zA-Z0-9äöüÄÖÜ_.-]+@[a-zA-Z0-9äöüÄÖÜ][a-zA-Z0-9-äöüÄÖÜ.]+\.([a-zA-Z]{2,6})$/', $email)) {
-			// Workaround for german Umlauts
 			return true;
 		} else {
 			return false;

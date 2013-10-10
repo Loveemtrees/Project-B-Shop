@@ -8,17 +8,17 @@
 		if(!isset($_GET["page"])) {
 	?>
 	<form method="post" action="sign_up.php?page=2">
-		first_name:<input type="text" name="first_name" placeholder="first name" required/><br /> 
-		last_name:<input type="text" name="last_name" placeholder="last name" required/><br /> 
-		email: <input type="text" name="email" placeholder="email" required/><br /> 
-		place: <input type="text" name="place" placeholder="place" required/><br /> 
-		postcode: <input type="text" name="postcode" placeholder="postcode" required/><br />
-		street: <input type="text" name="street" placeholder="street" required/><br />
-		house_number: <input type="text" name="house_number" placeholder="house number" required/><br />
-		date_of_birth: <input type="text" name="date_of_birth" placeholder="dd.mm.yyyy" required/><br />
-		password:<input type="password" name="password" placeholder="password" required/><br />
-		password repeat:<input type="password" name="password2" placeholder="password repeat" required/><br />
-		<input type="submit" value="Senden" />
+		first_name:<input type="text" name="first_name" placeholder="first name" required/><br> 
+		last_name:<input type="text" name="last_name" placeholder="last name" required/><br> 
+		email: <input type="text" name="email" placeholder="email" required><br> 
+		place: <input type="text" name="place" placeholder="place" required><br> 
+		postcode: <input type="text" name="postcode" placeholder="postcode" required><br>
+		street: <input type="text" name="street" placeholder="street" required><br>
+		house_number: <input type="text" name="house_number" placeholder="house number" required><br>
+		date_of_birth: <input type="text" name="date_of_birth" placeholder="dd.mm.yyyy" required/><br>
+		password:<input type="password" name="password" placeholder="password" required><br>
+		password repeat:<input type="password" name="password2" placeholder="password repeat" required><br>
+		<input type="submit" value="Senden">
 	</form>
 		<?php
 		}
@@ -68,6 +68,8 @@
 			else if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $_POST['password'])) {
 				echo "Bitte ueberpruefe die Eingabe von deinem Passwort!";
 			} else {
+			
+				// MySQL Verbindung
 				$verbindung = mysql_connect("localhost", "root", "")
 				or die ("Fehler im System");
 

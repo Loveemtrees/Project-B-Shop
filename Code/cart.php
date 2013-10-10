@@ -1,4 +1,6 @@
-<?php require "cart_functions.php"; ?>
+<?php 
+	require_once "cart_functions.php"; 
+?>
 
 <?php
 if(isset($_SESSION["username"])) {
